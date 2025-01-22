@@ -1,11 +1,13 @@
 package org.example.abstracts;
 
+import org.example.interfaces.AnsiInterface;
 import org.example.interfaces.EntityInterface;
 import org.example.model.Cell;
 
-public abstract class Entity implements EntityInterface {
+public abstract class Entity implements EntityInterface, AnsiInterface {
     public Cell cell;
     public  String name;
+
     public Entity(Cell cell, String name) {
         this.cell = cell;
         this.name = name;

@@ -6,6 +6,12 @@ abstract public class Creature extends  Entity{
     public final int speed;
     public  int HP;
 
+    public Creature(String name, int speed, int hp) {
+        super(name);
+        this.speed = speed;
+        this.HP = hp;
+    }
+
     public Creature(int speed, int HP) {
         this.speed = speed;
         this.HP = HP;
