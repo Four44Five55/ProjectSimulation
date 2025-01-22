@@ -4,7 +4,7 @@ import org.example.model.Cell;
 
 abstract public class Creature extends  Entity{
     public final int speed;
-    public final int HP;
+    public  int HP;
 
     public Creature(int speed, int HP) {
         this.speed = speed;
@@ -18,5 +18,14 @@ abstract public class Creature extends  Entity{
     }
     public void makeMove(){
 
+    }
+    public void takeDamage(int damage){
+        this.HP-=damage;
+        if (this.HP<0){
+            this.HP=0;
+        }
+    }
+    public void heal(int amount){
+        this.HP+=amount;
     }
 }
