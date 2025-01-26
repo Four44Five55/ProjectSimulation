@@ -1,16 +1,20 @@
 package org.example.model;
 
 import org.example.abstracts.Creature;
+import org.example.interfaces.CreatureConstantsInterface;
 
-public class Predator extends Creature {
-
-    int speed=2;
-    int HP=20;
-    public Predator(int speed, int HP) {
-        super(ANSI_PREDATOR,speed, HP);
+public class Predator extends Creature implements CreatureConstantsInterface {
+    private int powerAttack=5;
+    public Predator() {
+        super(ANSI_PREDATOR, SPEED_PREDATOR, HP_PREDATOR);
     }
 
-    public Predator(Cell cell, String name, int speed, int hp) {
-        super(cell, name, speed, hp);
+    public int getPowerAttack() {
+        return powerAttack;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

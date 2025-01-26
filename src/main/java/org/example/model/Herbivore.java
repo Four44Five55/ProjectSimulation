@@ -1,12 +1,12 @@
 package org.example.model;
 
 import org.example.abstracts.Creature;
+import org.example.interfaces.CreatureConstantsInterface;
 
-public class Herbivore extends Creature  {
-     int speed=2;
-     int HP=20;
-    public Herbivore(int speed,int HP) {
-        super(ANSI_HERBIVORE,speed,HP);
+public class Herbivore extends Creature implements CreatureConstantsInterface {
+
+    public Herbivore() {
+        super(ANSI_HERBIVORE, SPEED_HERBIVORE, HP_HERBIVORE);
     }
 
     @Override
