@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.actions.AddRandomEntity;
 import org.example.interfaces.EntityInterface;
 import org.example.model.*;
 
@@ -10,10 +11,8 @@ public class Main {
     public static void main(String[] args) {
         Map map=new Map();
 
-        map.setEntity(new Cell(1,1),new Rock());
-        map.setEntity(new Cell(1,2),new Grass());
-        map.setEntity(new Cell(5,7),new Predator());
-        map.setEntity(new Cell(11,13),new Herbivore());
+        AddRandomEntity addRandomEntity=new AddRandomEntity(map);
+        addRandomEntity.alignmentOfEntity();
 
         MapConsoleRenderer renderer=new MapConsoleRenderer();
         renderer.render(map);
