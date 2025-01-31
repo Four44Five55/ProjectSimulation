@@ -11,4 +11,6 @@ public class Rock extends Entity {
     public Rock() {
         super(ANSI_ROCK);
     }
+
+
 }

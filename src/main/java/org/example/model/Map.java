@@ -1,7 +1,7 @@
 package org.example.model;
 
 import org.example.abstracts.Entity;
-import org.example.interfaces.EntityInterface;
+
 
 import java.util.HashMap;
 

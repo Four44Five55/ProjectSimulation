@@ -9,22 +9,12 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
-        Map map=new Map();
-
-        AddRandomEntity addRandomEntity=new AddRandomEntity(map);
+        Map map = new Map();
+        AddRandomEntity addRandomEntity = new AddRandomEntity(map);
         addRandomEntity.alignmentOfEntity();
-
-        MapConsoleRenderer renderer=new MapConsoleRenderer();
+        MapConsoleRenderer renderer = new MapConsoleRenderer();
         renderer.render(map);
         System.out.println(" ");
 
-
-
-
-
-
-
     }
-
-
 }
