@@ -18,6 +18,10 @@ public abstract class Entity implements EntityInterface, AnsiInterface {
     public Entity() {
     }
 
+    public void setCell(Cell cell) {
+        this.cell = cell;
+    }
+
     public Entity(String name) {
         this.name = name;
     }

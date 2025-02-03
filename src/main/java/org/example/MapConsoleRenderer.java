@@ -25,22 +25,22 @@ public class MapConsoleRenderer implements AnsiInterface {
     }
 
 
-    private String colorizeCell(Map map, Cell cell) {
+/*    private String colorizeCell(Map map, Cell cell) {
 
         Entity entity = map.getMap().get(cell);
-/*        String result =switch (entity.name){
+        String result =switch (entity.name){
             case ANSI_GRASS -> ANSI_GRASS;
             case ANSI_HERBIVORE -> ANSI_HERBIVORE;
             case ANSI_PREDATOR -> ANSI_PREDATOR;
             case ANSI_ROCK -> ANSI_ROCK
         }
 
-        return result;*/
+        return result;
         return null;
-    }
+    }*/
 
-    private String getEntityOrEmpty(Cell cell) {
+/*    private String getEntityOrEmpty(Cell cell) {
         return " ";
-    }
+    }*/
 
 }
