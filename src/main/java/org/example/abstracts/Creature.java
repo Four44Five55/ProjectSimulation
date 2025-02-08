@@ -1,7 +1,7 @@
 package org.example.abstracts;
 
 import org.example.model.Cell;
-import org.example.model.Map;
+import org.example.model.SimulationMap;
 
 import java.util.ArrayList;
 
@@ -27,25 +27,25 @@ abstract public class Creature extends Entity {
         this.HP = hp;
     }
 
-    public void makeMove(Cell cell,Map map) {
+    public void makeMove(Cell cell, SimulationMap simulationMap) {
         Cell deleteCell=this.cell;
-        map.setEntity(cell, map.getMap().get(this.cell));
-        map.getMap().remove(deleteCell);
+        simulationMap.setEntity(cell, simulationMap.getMap().get(this.cell));
+        simulationMap.getMap().remove(deleteCell);
 
         //this.cell = cell;
     }
 
-    public void getListNearEmptyCell(Map map) {
+    public void updateListNearEmptyCell(SimulationMap simulationMap) {
         Cell creatureCell = this.cell;
         //ArrayList<Cell> arrayList = new ArrayList<>();
         int rangeOfVision = 1;
         for (int row = -rangeOfVision; row <= rangeOfVision; row++) {
             for (int column = -rangeOfVision; column <= rangeOfVision; column++) {
-                int checkedRow = creatureCell.row + row;
-                int checkedColumn = creatureCell.column + column;
-                Cell cell = new Cell(checkedRow + correctIntSteppingOutside(checkedRow, map.getTotalRows()),
-                        checkedColumn + correctIntSteppingOutside(checkedColumn, map.getTotalColumns()));
-                if (!map.getMap().containsKey(cell)) {
+                int checkedRow = creatureCell.getRow() + row;
+                int checkedColumn = creatureCell.getColumn() + column;
+                Cell cell = new Cell(checkedRow + correctIntSteppingOutside(checkedRow, simulationMap.getTotalRows()),
+                        checkedColumn + correctIntSteppingOutside(checkedColumn, simulationMap.getTotalColumns()));
+                if (!simulationMap.getMap().containsKey(cell)) {
                     listNearEmptyCell.add(cell);
                 }
             }

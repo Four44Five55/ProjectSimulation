@@ -6,18 +6,19 @@ import org.example.interfaces.AnsiInterface;
 import org.example.interfaces.EnumEntity;
 import org.example.model.*;
 
-import java.util.Random;
-
 public class AddRandomEntity extends Action implements AnsiInterface {
     final double TOTAL_PERCENT_CAPACITY_ENTITY = 0.3;
     final double TOTAL_ENTITY = 5;
 
     String name;
 
-    Map map;
+    public AddRandomEntity(SimulationMap simulationMap) {
+        this.simulationMap = simulationMap;
+    }
 
-    public AddRandomEntity(Map map) {
-        this.map = map;
+    @Override
+    public void makeTurn() {
+        alignmentOfEntity();
     }
 
     public static Entity createEntity(EnumEntity enumEntity) {
@@ -41,18 +42,13 @@ public class AddRandomEntity extends Action implements AnsiInterface {
         }
     }
 
-    public void alignmentOfEntity() {
-        int numberOfEntity = (int) Math.round(TOTAL_PERCENT_CAPACITY_ENTITY / TOTAL_ENTITY * map.getTotalRows() * map.getTotalColumns());
+    private void alignmentOfEntity() {
+        int numberOfEntity = (int) Math.round(TOTAL_PERCENT_CAPACITY_ENTITY / TOTAL_ENTITY * simulationMap.getTotalRows() * simulationMap.getTotalColumns());
         for (EnumEntity enumEntity : EnumEntity.values()) {
             for (int i = 1; i <= numberOfEntity; i++) {
-                map.setEntity(map.getRandomEmptyCell(), createEntity(enumEntity));
+                simulationMap.setEntity(simulationMap.getRandomEmptyCell(), createEntity(enumEntity));
             }
         }
-    }
-
-    @Override
-    public Map getMap() {
-        return map;
     }
 
     @Override

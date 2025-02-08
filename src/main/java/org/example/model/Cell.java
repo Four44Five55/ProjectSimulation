@@ -5,8 +5,8 @@ import org.example.interfaces.CellInterface;
 import java.util.Objects;
 
 public class Cell implements CellInterface {
-    public int row;
-    public int column;
+    private int row;
+    private int column;
 
     public Cell() {
     }
@@ -25,6 +25,14 @@ public class Cell implements CellInterface {
     @Override
     public CellInterface getCell() {
         return Cell.this;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
     }
 
     public void setColumn(int column) {

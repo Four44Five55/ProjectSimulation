@@ -7,8 +7,8 @@ import org.example.model.Cell;
 import java.util.Objects;
 
 public abstract class Entity implements EntityInterface, AnsiInterface {
-    public Cell cell;
-    public String name;
+    protected Cell cell;
+    protected String name;
 
     public Entity(Cell cell, String name) {
         this.cell = cell;
@@ -26,6 +26,7 @@ public abstract class Entity implements EntityInterface, AnsiInterface {
         this.name = name;
     }
 
+    @Override
     public Cell getCell() {
         return cell;
     }
