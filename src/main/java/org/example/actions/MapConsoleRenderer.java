@@ -1,4 +1,4 @@
-package org.example;
+package org.example.actions;
 
 import org.example.interfaces.AnsiInterface;
 import org.example.model.Cell;
@@ -8,6 +8,12 @@ public class MapConsoleRenderer implements AnsiInterface {
 
 
     public void render(SimulationMap simulationMap) {
+        if (simulationMap.getCounterTurns() < 1) {
+            System.out.println("Карта создана.");
+        } else {
+            System.out.printf("Выполнение %d хода.", simulationMap.getCounterTurns());
+            System.out.println();
+        }
         String line = "";
         for (int row = 1; row <= simulationMap.getTotalRows(); row++) {
             for (int column = 1; column <= simulationMap.getTotalColumns(); column++) {
@@ -21,5 +27,7 @@ public class MapConsoleRenderer implements AnsiInterface {
             System.out.println(line + ANSI_RESET);
             line = "";
         }
+
+
     }
 }

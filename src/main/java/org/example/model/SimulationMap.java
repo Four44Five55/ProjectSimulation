@@ -6,18 +6,16 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class SimulationMap {
+    private int counterTurns;
     private static int totalRows = 9;
     private static int totalColumns = 12;
     HashMap<Cell, Entity> map = new HashMap<>();
-
+    public SimulationMap() {
+    }
     public SimulationMap(int totalRows, int totalColumns) {
         SimulationMap.totalRows = totalRows;
         SimulationMap.totalColumns = totalColumns;
     }
-
-    public SimulationMap() {
-    }
-
     public HashMap<Cell, Entity> getMap() {
         return map;
     }
@@ -26,15 +24,19 @@ public class SimulationMap {
         entity.setCell(cell);
         map.put(cell, entity);
     }
-
-    /*  public Entity getEntity(Cell cell){
-       }*/
+    public void incrementCountTurns(){
+        counterTurns++;
+    }
     public int getTotalRows() {
         return totalRows;
     }
 
     public int getTotalColumns() {
         return totalColumns;
+    }
+
+    public int getCounterTurns() {
+        return counterTurns;
     }
 
     public Cell getRandomEmptyCell() {
@@ -51,7 +53,4 @@ public class SimulationMap {
         int column = random.nextInt(totalColumns - 1) + 1;
         return new Cell(row, column);
     }
-
-
-
 }

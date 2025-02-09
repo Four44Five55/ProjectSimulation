@@ -21,27 +21,6 @@ public class AddRandomEntity extends Action implements AnsiInterface {
         alignmentOfEntity();
     }
 
-    public static Entity createEntity(EnumEntity enumEntity) {
-        switch (enumEntity) {
-            case ROCK -> {
-                return new Rock();
-            }
-            case TREE -> {
-                return new Tree();
-            }
-            case GRASS -> {
-                return new Grass();
-            }
-            case PREDATOR -> {
-                return new Predator();
-            }
-            case HERBIVORE -> {
-                return new Herbivore();
-            }
-            default -> throw new IllegalArgumentException("Unknown entity type: " + enumEntity);
-        }
-    }
-
     private void alignmentOfEntity() {
         int numberOfEntity = (int) Math.round(TOTAL_PERCENT_CAPACITY_ENTITY / TOTAL_ENTITY * simulationMap.getTotalRows() * simulationMap.getTotalColumns());
         for (EnumEntity enumEntity : EnumEntity.values()) {

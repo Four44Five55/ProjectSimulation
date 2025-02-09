@@ -3,13 +3,13 @@ package org.example;
 import org.example.abstracts.Action;
 import org.example.actions.AddRandomEntity;
 import org.example.actions.MakeMoveAll;
+import org.example.actions.MapConsoleRenderer;
 import org.example.model.SimulationMap;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Simulation {
-    private int counterTurns;
+
     SimulationMap simulationMap= new SimulationMap();
     MapConsoleRenderer renderer=new MapConsoleRenderer();
     private ArrayList<Action> initActions=new ArrayList<>();
@@ -19,10 +19,7 @@ public class Simulation {
 
     }
 
-    public int getCounterTurns() {
-        return counterTurns;
-    }
-    public ArrayList<Action> getTurnActions() {
+     public ArrayList<Action> getTurnActions() {
         //ArrayList<Action> initActions=new ArrayList<>();
         turnActions.add(new MakeMoveAll(simulationMap));
         return turnActions;

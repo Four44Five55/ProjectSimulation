@@ -6,7 +6,7 @@ import org.example.interfaces.CreatureConstantsInterface;
 public class Herbivore extends Creature implements CreatureConstantsInterface {
 
     public Herbivore() {
-        super(ANSI_HERBIVORE, SPEED_HERBIVORE, HP_HERBIVORE);
+        super(ANSI_HERBIVORE, SPEED_HERBIVORE, HP_HERBIVORE,RANGE_VISION_HERBIVORE, ANSI_GRASS);
     }
 
     @Override
@@ -14,8 +14,5 @@ public class Herbivore extends Creature implements CreatureConstantsInterface {
         return name;
     }
 
-    @Override
-    public void updateListNearEmptyCell(SimulationMap simulationMap) {
-        super.updateListNearEmptyCell(simulationMap);
-    }
+
 }

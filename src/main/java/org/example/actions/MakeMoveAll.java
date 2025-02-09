@@ -19,35 +19,22 @@ public class MakeMoveAll extends Action implements AnsiInterface {
 
     @Override
     public void makeTurn() {
-        Map<Cell, Entity> changes = new HashMap<>();
+        List<Creature> creatureArrayList = new ArrayList<>();
         Iterator<Map.Entry<Cell, Entity>> iterator = simulationMap.getMap().entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<Cell, Entity> entry = iterator.next();
             if (ANSI_PREDATOR.equals(entry.getValue().getName()) || ANSI_HERBIVORE.equals(entry.getValue().getName())) {
-                Creature creature = (Creature) entry.getValue();
-                creature.updateListNearEmptyCell(simulationMap);
-
-                Cell newCell = getRandomCellFromList(creature.getListNearEmptyCell());
-                if (newCell != null) {
-                    changes.put(newCell, creature); // Добавляем на новую клетку
-                    iterator.remove(); // Удаляем со старой клетки
-                }
+                creatureArrayList.add((Creature) entry.getValue());
             }
         }
-
-        simulationMap.getMap().putAll(changes);
+        for (Creature creature : creatureArrayList) {
+            creature.makeMove(simulationMap);
+        }
     }
-
-
 
     @Override
     public String getName() {
         return name;
-    }
-
-    private Cell getRandomCellFromList(ArrayList<Cell> cellArrayList) {
-        Random randomizer = new Random();
-        return cellArrayList.get(randomizer.nextInt(cellArrayList.size()));
     }
 
 
