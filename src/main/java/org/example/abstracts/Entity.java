@@ -38,10 +38,7 @@ public abstract class Entity implements EntityInterface, AnsiInterface {
 
     @Override
     public String toString() {
-        return "Entity{" +
-                "cell=" + cell +
-                ", name='" + name + '\'' +
-                '}';
+        return  name;
     }
 
     @Override

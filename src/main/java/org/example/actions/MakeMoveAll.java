@@ -20,15 +20,19 @@ public class MakeMoveAll extends Action implements AnsiInterface {
     @Override
     public void makeTurn() {
         List<Creature> creatureArrayList = new ArrayList<>();
-        Iterator<Map.Entry<Cell, Entity>> iterator = simulationMap.getMap().entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Cell, Entity> entry = iterator.next();
+        Map<Cell, Entity> mapCopy = new HashMap<>(simulationMap.getMap()); // Создаем копию map
+
+        for (Map.Entry<Cell, Entity> entry : mapCopy.entrySet()) {
             if (ANSI_PREDATOR.equals(entry.getValue().getName()) || ANSI_HERBIVORE.equals(entry.getValue().getName())) {
                 creatureArrayList.add((Creature) entry.getValue());
             }
         }
+
         for (Creature creature : creatureArrayList) {
-            creature.makeMove(simulationMap);
+            if (simulationMap.getMap().containsKey(creature.getCell())) {
+                creature.makeMove(simulationMap);
+            }
+
         }
     }
 

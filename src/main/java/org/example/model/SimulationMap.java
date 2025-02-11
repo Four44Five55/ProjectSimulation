@@ -24,6 +24,13 @@ public class SimulationMap {
         entity.setCell(cell);
         map.put(cell, entity);
     }
+    public void removeEntity(Cell cell) {
+        if (map.containsKey(cell)) {
+            map.remove(cell);
+        } else {
+            System.out.println("Key not found: " + cell);
+        }
+    }
     public void incrementCountTurns(){
         counterTurns++;
     }

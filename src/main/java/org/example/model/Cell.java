@@ -5,22 +5,13 @@ import org.example.interfaces.CellInterface;
 import java.util.Objects;
 
 public class Cell implements CellInterface {
-    private int row;
-    private int column;
-
-    public Cell() {
-    }
+    private final int row;
+    private final int column;
 
     public Cell(int row, int column) {
         this.row = row;
         this.column = column;
     }
-
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
 
     @Override
     public CellInterface getCell() {
@@ -33,10 +24,6 @@ public class Cell implements CellInterface {
 
     public int getColumn() {
         return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
     }
 
     @Override
@@ -55,8 +42,8 @@ public class Cell implements CellInterface {
     @Override
     public String toString() {
         return
-                "row=" + row +
-                        ", column=" + column
+                "r=" + row +
+                        ", c=" + column
                 ;
     }
 }

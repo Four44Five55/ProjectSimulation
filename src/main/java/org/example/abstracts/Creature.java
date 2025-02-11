@@ -1,7 +1,8 @@
 package org.example.abstracts;
 
-import org.example.interfaces.EnumEntity;
 import org.example.model.Cell;
+import org.example.model.Grass;
+import org.example.model.Herbivore;
 import org.example.model.SimulationMap;
 
 import java.util.*;
@@ -9,18 +10,20 @@ import java.util.*;
 abstract public class Creature extends Entity {
     private final int speed;
     private int HP;
-    private int rangeOfVision;
-    private String targetEntity;
-    private int rangeOfAttack=1;
+    private final int rangeOfVision;
+    private final String targetEntity;
+    private final int rangeOfAttack = 1;
+    private final int powerAttack;
 
-    public Creature(String name, int speed, int hp, int rangeOfVision, String targetEntity) {
+    public Creature(String name, int speed, int hp, int rangeOfVision, String targetEntity, int powerAttack) {
         super(name);
         this.speed = speed;
         this.HP = hp;
         this.rangeOfVision = rangeOfVision;
         this.targetEntity = targetEntity;
-
+        this.powerAttack = powerAttack;
     }
+
     //TODO: реализовать методы атаки и уменьшения ХП
     public void makeMove(SimulationMap simulationMap) {
         ArrayList<Cell> listNearEmptyCell = new ArrayList<>();
@@ -42,22 +45,37 @@ abstract public class Creature extends Entity {
         }
 
         if (!listTargetCell.isEmpty()) {
-            for (Cell cellTarget: listTargetCell){
-                System.out.println("Хищник в ячейке " + this.cell.toString());
-                System.out.println("Цель в ячейке " + cellTarget.toString());
+            for (Cell cellTarget : listTargetCell) {
+
                 if (isTargetNearForAttack(cellTarget)) {
-                    System.out.println(this.name + " " + this.cell.toString() + " Attacked " + simulationMap.getMap().get(cellTarget).getName() + " " + cellTarget);
-                    Creature creature=(Creature) simulationMap.getMap().get(cellTarget);
-                    creature.takeDamage(1);
+
+                    if (simulationMap.getMap().get(cellTarget) instanceof Herbivore herbivore) {
+                        herbivore.takeDamage(this.powerAttack);
+                        if (herbivore.isDead()) {
+                            System.out.println(simulationMap.getMap().get(cellTarget).getName() + " " + cellTarget + " съеден");
+                            simulationMap.removeEntity(cellTarget);
+                        }
+                    } else if (simulationMap.getMap().get(cellTarget) instanceof Grass grass) {
+                        grass.takeDamage(this.powerAttack);
+                        if (grass.isDead()) {
+                            System.out.println(simulationMap.getMap().get(cellTarget).getName() + " " + cellTarget + " съеден");
+                            simulationMap.removeEntity(cellTarget);
+                        }
+                    }
                 }
             }
 
         } else {
             Cell newCell = getRandomCellFromList(listNearEmptyCell);
             Cell oldCell = this.cell;
-            if (newCell != null) {
-                simulationMap.getMap().put(newCell, simulationMap.getMap().get(this.cell)); // Добавляем на новую клетку
-                simulationMap.getMap().remove(oldCell);// Удаляем со старой клетки
+
+            if (newCell != null && !newCell.equals(oldCell)) {
+                simulationMap.setEntity(newCell, simulationMap.getMap().get(this.cell));
+                simulationMap.removeEntity(oldCell);
+
+               /* simulationMap.getMap().put(newCell, simulationMap.getMap().get(this.cell)); // Добавляем на новую клетку
+                simulationMap.getMap().remove(oldCell); // Удаляем со старой клетки
+                this.cell = newCell; // Обновляем внутреннее состояние*/
             }
         }
     }
@@ -70,14 +88,23 @@ abstract public class Creature extends Entity {
         }
     }
 
+    protected boolean isDead() {
+        return this.HP <= 0;
+    }
+
     private Cell getRandomCellFromList(ArrayList<Cell> cellArrayList) {
         Random randomizer = new Random();
         return cellArrayList.get(randomizer.nextInt(cellArrayList.size()));
     }
-    public void toAttack(Cell cell){
 
-
+    public int getPowerAttack() {
+        return powerAttack;
     }
+
+    public void toAttack(Creature creature) {
+        creature.takeDamage(this.powerAttack);
+    }
+
     public void takeDamage(int damage) {
         this.HP -= damage;
         if (this.HP < 0) {

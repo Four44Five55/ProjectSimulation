@@ -1,15 +1,8 @@
 package org.example;
 
 import org.example.abstracts.Action;
-import org.example.abstracts.Entity;
-import org.example.actions.AddRandomEntity;
-import org.example.interfaces.AnsiInterface;
-import org.example.model.*;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,16 +13,20 @@ public class Main {
         while (initAction.hasNext()) {
             initAction.next().makeTurn();
         }
-
         simulation.render();
 
-        Iterator<Action> turnAction = simulation.getTurnActions().iterator();
-        while (turnAction.hasNext()) {
-            turnAction.next().makeTurn();
-            simulation.simulationMap.incrementCountTurns();
+
+        for (int i=1;i<=10;i++){
+            Iterator<Action> turnAction = simulation.getTurnActions().iterator();
+            while (turnAction.hasNext()) {
+                turnAction.next().makeTurn();
+                simulation.simulationMap.incrementCountTurns();
+                simulation.render();
+            }
+
+
         }
 
-        simulation.render();
 
         System.out.println("==================");
     }

@@ -6,7 +6,11 @@ import org.example.interfaces.CreatureConstantsInterface;
 public class Herbivore extends Creature implements CreatureConstantsInterface {
 
     public Herbivore() {
-        super(ANSI_HERBIVORE, SPEED_HERBIVORE, HP_HERBIVORE,RANGE_VISION_HERBIVORE, ANSI_GRASS);
+        super(ANSI_HERBIVORE, SPEED_HERBIVORE, HP_HERBIVORE,RANGE_VISION_HERBIVORE, ANSI_GRASS, POWER_ATTACK_HERBIVORE);
+    }
+
+    public void toEat(Grass grass) {
+        grass.takeDamage(this.getPowerAttack());
     }
 
     @Override
