@@ -5,9 +5,7 @@ import org.example.model.Cell;
 import org.example.model.SimulationMap;
 
 public class MapConsoleRenderer implements AnsiInterface {
-
-
-    public void render(SimulationMap simulationMap) {
+    public static void render(SimulationMap simulationMap) throws InterruptedException {
         if (simulationMap.getCounterTurns() < 1) {
             System.out.println("Карта создана.");
         } else {
@@ -25,9 +23,10 @@ public class MapConsoleRenderer implements AnsiInterface {
                 }
             }
             System.out.println(line + ANSI_RESET);
+
             line = "";
         }
-
-
+        simulationMap.incrementCountTurns();
+        Thread.sleep(2500);
     }
 }

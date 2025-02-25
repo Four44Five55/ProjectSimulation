@@ -6,34 +6,26 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class SimulationMap {
-    private int counterTurns;
-    private static int totalRows = 9;
-    private static int totalColumns = 12;
+
     HashMap<Cell, Entity> map = new HashMap<>();
+    private static int totalRows = 6;
+    private static int totalColumns = 15;
+    final double TOTAL_PERCENT_CAPACITY_ENTITY = 0.2;
+    final double TOTAL_ENTITY = 5;
+    private int counterTurns;
+
     public SimulationMap() {
     }
+
     public SimulationMap(int totalRows, int totalColumns) {
         SimulationMap.totalRows = totalRows;
         SimulationMap.totalColumns = totalColumns;
     }
+
     public HashMap<Cell, Entity> getMap() {
         return map;
     }
 
-    public void setEntity(Cell cell, Entity entity) {
-        entity.setCell(cell);
-        map.put(cell, entity);
-    }
-    public void removeEntity(Cell cell) {
-        if (map.containsKey(cell)) {
-            map.remove(cell);
-        } else {
-            System.out.println("Key not found: " + cell);
-        }
-    }
-    public void incrementCountTurns(){
-        counterTurns++;
-    }
     public int getTotalRows() {
         return totalRows;
     }
@@ -45,6 +37,28 @@ public class SimulationMap {
     public int getCounterTurns() {
         return counterTurns;
     }
+
+    public int getCapacityOneEntity() {
+        return (int) Math.round(TOTAL_PERCENT_CAPACITY_ENTITY / TOTAL_ENTITY * totalRows * totalColumns);
+    }
+
+    public void setEntity(Cell cell, Entity entity) {
+        entity.setCell(cell);
+        map.put(cell, entity);
+    }
+
+    public void removeEntity(Cell cell) {
+        if (map.containsKey(cell)) {
+            map.remove(cell);
+        } else {
+            System.out.println("Key not found: " + cell);
+        }
+    }
+
+    public void incrementCountTurns() {
+        counterTurns++;
+    }
+
 
     public Cell getRandomEmptyCell() {
         Cell cell = SimulationMap.getRandomCell();

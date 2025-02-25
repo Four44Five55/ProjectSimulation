@@ -10,7 +10,6 @@ import org.example.model.SimulationMap;
 import java.util.*;
 
 public class MakeMoveAll extends Action implements AnsiInterface {
-    String name = "Движение всеми существами";
     SimulationMap simulationMap;
 
     public MakeMoveAll(SimulationMap simulationMap) {
@@ -18,7 +17,7 @@ public class MakeMoveAll extends Action implements AnsiInterface {
     }
 
     @Override
-    public void makeTurn() {
+    public void makeTurn() throws InterruptedException {
         List<Creature> creatureArrayList = new ArrayList<>();
         Map<Cell, Entity> mapCopy = new HashMap<>(simulationMap.getMap()); // Создаем копию map
 
@@ -35,11 +34,4 @@ public class MakeMoveAll extends Action implements AnsiInterface {
 
         }
     }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-
 }
